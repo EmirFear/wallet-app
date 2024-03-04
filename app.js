@@ -22,7 +22,7 @@ window.addEventListener("load", ()=>{
 
 ekleFormu.addEventListener("submit",(e)=>{
     e.preventDefault()
-    gelirler = gelirler + Number(gelirInput.value)
+    gelirler = gelirler + +(gelirInput.value)
     console.log(gelirler)
     ekleFormu.reset()
     localStorage.setItem("gelirler", gelirler)
@@ -39,3 +39,21 @@ const miktarInput = document.getElementById("miktar")
 
 const harcamaBody = document.getElementById("harcama-body")
 const temizleBtn = document.getElementById("temizle-btn")
+
+harcamaFormu.addEventListener("submit",(e)=>{
+    const yeniHarcama = {
+        tarih: tarihInput.value,
+        miktar: miktarInput.value,
+        alan: harcamaAlaniInput.value,
+        id: new Date().getTime()
+
+    }
+
+    /* console.log(yeniHarcama) */
+    harcamaListesi.push(yeniHarcama)
+    console.log(harcamaListesi);
+    localStorage.setItem("harcamalar", JSON.stringify(harcamalarListesi))
+    
+    harcamaFormu.reset()
+    tarihInput.valueAsDate = new Date()
+})
