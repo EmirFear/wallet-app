@@ -29,3 +29,13 @@ ekleFormu.addEventListener("submit",(e)=>{
     gelirinizTd.textContent = gelirler
 })
 
+
+//? Harcama Formu 
+
+const harcamaFormu = document.getElementById("harcama-formu")
+const harcamaAlaniInput = document.getElementById("harcama-alani")
+const tarihInput = document.getElementById("tarih")
+const miktarInput = document.getElementById("miktar")
+
+const harcamaBody = document.getElementById("harcama-body")
+const temizleBtn = document.getElementById("temizle-btn")
