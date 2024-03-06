@@ -17,8 +17,15 @@ let harcamaListesi = []
 
 window.addEventListener("load", () => {
   gelirler = localStorage.getItem("gelirler") || 0
+  harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || []
+
+  harcamaListesi.forEach(harcama =>{
+    harcamayiDomaYaz(harcama)
+  })
+
   gelirinizTd.textContent = gelirler
   tarihInput.valueAsDate = new Date()
+
 });
 
 ekleFormu.addEventListener("submit", (e) => {
@@ -61,6 +68,8 @@ harcamaFormu.addEventListener("submit", (e) => {
 })
 
 
+
+//& Harcamayı HTMLe yazdık
 
 const harcamayiDomaYaz = ({id, miktar, tarih, alan}) =>{
     const tr = document.createElement("tr")
