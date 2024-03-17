@@ -13,22 +13,10 @@ const kalanTd = document.getElementById("kalan")
 let gelirler = 0;
 let harcamaListesi = []
 
+
+
+
 //*Ekle Formu
-
-window.addEventListener("load", () => {
-  gelirler = localStorage.getItem("gelirler") || 0
-  harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || []
-
-  harcamaListesi.forEach(harcama =>{
-    harcamayiDomaYaz(harcama)
-  })
-
-  gelirinizTd.textContent = gelirler
-  hesaplaVeGuncelle()
-  tarihInput.valueAsDate = new Date()
-
-});
-
 ekleFormu.addEventListener("submit", (e) => {
   e.preventDefault()
   gelirler = gelirler + +gelirInput.value;
@@ -120,3 +108,32 @@ const hesaplaVeGuncelle = ()=>{
   gelirinizTd.textContent = gelirler
   kalanTd.textContent = gelirler - giderler
 }
+
+
+//? Event Listeners
+
+window.addEventListener("load", () => {
+  gelirler = localStorage.getItem("gelirler") || 0
+  harcamaListesi = JSON.parse(localStorage.getItem("harcamalar")) || []
+
+  harcamaListesi.forEach(harcama =>{
+    harcamayiDomaYaz(harcama)
+  })
+
+  gelirinizTd.textContent = gelirler
+  hesaplaVeGuncelle()
+  tarihInput.valueAsDate = new Date()
+
+});
+
+harcamaBody.addEventListener("click",(e)=>{
+  /* console.log(e.target.classList.contains("fa-trash-can")); */
+
+  if (e.target.classList.contains("fa-trash-can")) {
+    e.target.parentElement.parentElement.remove()
+    const id = e.target.id
+    harcamaListesi = harcamaListesi.filter((harcama)=> harcama.id != id)
+  }
+
+
+} ) 
