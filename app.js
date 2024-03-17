@@ -133,7 +133,21 @@ harcamaBody.addEventListener("click",(e)=>{
     e.target.parentElement.parentElement.remove()
     const id = e.target.id
     harcamaListesi = harcamaListesi.filter((harcama)=> harcama.id != id)
+    localStorage.setItem("harcamalar", JSON.stringify(harcamaListesi))
   }
 
 
 } ) 
+
+
+
+temizleBtn.addEventListener("click", ()=>{
+  if (confirm("Tüm veriler silinicek. Devam etmek istiyor musun?")) {
+    harcamaListesi = []
+    gelirler = 0
+    harcamaBody.innerHTML = ""
+    localStorage.removeItem("gelirler")
+    localStorage.removeItem("harcamalar")
+    hesaplaVeGuncelle()
+  }
+})
