@@ -24,6 +24,7 @@ window.addEventListener("load", () => {
   })
 
   gelirinizTd.textContent = gelirler
+  hesaplaVeGuncelle()
   tarihInput.valueAsDate = new Date()
 
 });
@@ -34,7 +35,8 @@ ekleFormu.addEventListener("submit", (e) => {
   console.log(gelirler)
   ekleFormu.reset()
   localStorage.setItem("gelirler", gelirler);
-  gelirinizTd.textContent = gelirler;
+  hesaplaVeGuncelle()
+  
 })
 
 //! Harcama Formu
@@ -64,6 +66,7 @@ harcamaFormu.addEventListener("submit", (e) => {
   harcamayiDomaYaz(yeniHarcama)
   harcamaFormu.reset();
   tarihInput.valueAsDate = new Date();
+  hesaplaVeGuncelle()
 
 })
 
@@ -102,4 +105,18 @@ const harcamayiDomaYaz = ({id, miktar, tarih, alan}) =>{
     harcamaBody.append(tr) //& son girileni alta ekler
     // harcamaBody.prepend(tr) //& son girileni öne ekler
     
+}
+
+
+
+//& hesapla ve güncelle
+const hesaplaVeGuncelle = ()=>{
+  const giderler = harcamaListesi.reduce(
+    (toplam, harcama) => toplam + Number(harcama.miktar),0
+  )
+
+
+  giderinizTd.textContent = giderler
+  gelirinizTd.textContent = gelirler
+  kalanTd.textContent = gelirler - giderler
 }
